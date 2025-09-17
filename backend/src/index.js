@@ -23,16 +23,8 @@ app.get('/', (req, res) => {
   res.send('Backend is running!');
 });
 
-// Exemple endpoint pour récupérer les recettes
-app.get('/recipes', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM recipes'); // table à créer
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Database error' });
-  }
-});
+const userIngredientsRoutes = require('./routes/userIngredients');
+app.use('/api/user-ingredients', userIngredientsRoutes);
 
 app.listen(port, () => {
   console.log(`Backend listening on port ${port}`);
