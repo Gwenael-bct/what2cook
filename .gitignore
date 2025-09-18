@@ -14,13 +14,6 @@ backend/dist
 **/.env
 
 # -----------------
-# Docker
-# -----------------
-# Docker artifacts
-**/docker-compose.override.yml
-**/Dockerfile.*
-
-# -----------------
 # OS / IDE
 # -----------------
 # MacOS

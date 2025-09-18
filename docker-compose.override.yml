@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      target: dev
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
