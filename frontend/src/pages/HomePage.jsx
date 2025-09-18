@@ -1,6 +1,6 @@
 import React from 'react';
 // import { CallToAction } from '../components/CallToAction';
-// import { RecipesGrid } from '../components/RecipesGrid';
+import RecipesCarousel from '../components/RecipesCarousel';
 import FeaturesSection from '../components/FeaturesSection';
 import HeroSection from '../components/HeroSection';
 
@@ -12,7 +12,7 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto">
             <HeroSection />
             <FeaturesSection />
-            {/*<RecipesGrid />*/}
+            <RecipesCarousel />
             {/*<CallToAction />*/}
           </div>
         </div>

@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* src/index.css (ajoute en bas) */
+
+/* Masquer scrollbar pour Chrome, Safari et Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  height: 0; /* utile pour scroll horizontal */
+}
+
+/* Masquer scrollbar pour Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+}
+
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 15s linear infinite;
+  will-change: transform;
+}
+
+.carousel {
+  overflow: hidden;
+  display: flex;
+
+  &:hover .group {
+    animation-play-state: paused;
+  }
+}
