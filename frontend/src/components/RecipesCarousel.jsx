@@ -12,22 +12,23 @@ const recipeImages = importAll(
 
 export default function RecipesCarousel() {
   return (
-      <div className="bg-yellow-50 bg-opacity-75 p-4 overflow-hidden">
+      <div className="p-6 overflow-hidden">
         <div className="carousel flex">
           <div className="carousel-inner flex gap-4 animate-scroll">
             {[...recipeImages, ...recipeImages].map((img, i) => (
                 <div
                     key={i}
-                    className="flex-shrink-0 w-48 flex flex-col items-center shadow-xl rounded-xl bg-yellow-50 bg-opacity-75 p-4"
+                    className="flex-shrink-0 w-48 flex flex-col items-center shadow-xl rounded-xl
+                    bg-cyan-950 bg-opacity-75 p-4 py-2 border-amber-100 border-2"
                 >
                   <div className="inline-flex items-center justify-center">
                     <img
                         src={img.src}
                         alt={img.name}
-                        className="rounded-lg shadow w-40 h-40 object-cover"
+                        className="rounded-lg shadow w-full h-full object-cover"
                     />
                   </div>
-                  <div className="text-center mt-2 text-sm font-bold">
+                  <div className="text-center mt-2 text-sm font-bold text-white pt-2">
                     {img.name.replace(/-/g, " ")}
                   </div>
                 </div>

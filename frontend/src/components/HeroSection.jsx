@@ -1,40 +1,57 @@
+import SearchIcon from '@mui/icons-material/Search';
+import Header from './Header';
 export default function HeroSection() {
   return (
       <div
           className="
-        bg-no-repeat bg-center bg-cover
-        flex flex-col justify-center items-center
-        px-4 py-16 sm:px-8 md:px-12 lg:px-24
-        max-w-6xl mx-auto
-      "
-          style={{ backgroundImage: "url('/assets/images/homePage/header.png')" }}
-      >
-        <div
-            className="
-          w-full max-w-sm transition ease-in-out
-          p-4 bg-gray-200 rounded-xl shadow-lg bg-opacity-75
-          flex flex-col gap-2 md:flex-row md:gap-4 md:max-w-lg
+          bg-contain relative
+          flex flex-col justify-center items-center
+          aspect-[3072/1344]
         "
-        >
-          <input
-              placeholder="Enter your ingredients..."
+          style={{
+            backgroundImage: "url('/assets/images/homePage/hero_banner.webp')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+      >
+        <Header />
+        <div className="grid-cols-1 flex flex-col justify-center items-center">
+
+          <h1 className="text-3xl m-6 md:text-3xl font-medium text-white">
+            Transform your ingredients into extraordinary dishes
+          </h1>
+
+          <div
               className="
-            flex-1 bg-white
-            p-3 border border-emerald-500 rounded-full bg-opacity-85
-            text-center
-            focus:outline-none focus:ring-1 focus:ring-emerald-500
-          "
-          />
-          <button
-              className="
-            bg-orange-400 font-bold text-white
-            px-6 py-3 rounded-full
-            whitespace-nowrap
-            bg-opacity-85 hover:bg-orange-500
-          "
+          w-full max-w-sm transition ease-in-out
+          p-2 bg-transparent rounded-xl shadow-lg bg-opacity-75
+          flex flex-col gap-2 md:flex-row md:gap-2 md:max-w-lg
+          border-amber-100 border-2
+        "
           >
-            Find Recipes
-          </button>
+            <div className="hidden items-center bg-white rounded-xl px-5 py-2 relative md:flex-1 md:flex">
+              <SearchIcon className="text-gray-400"/>
+              <input
+                  placeholder="Enter your ingredients..."
+                  className="
+                    flex-1 bg-white
+                    p-2 rounded-xl bg-opacity-85
+                    outline-none focus:outline-none"
+              />
+            </div>
+
+            <button
+                className="
+            bg-orange-500 font-bold text-white
+            px-6 py-3 rounded-xl
+            whitespace-nowrap
+          hover:bg-black bg-opacity-95
+          "
+            >
+              Find Recipes
+            </button>
+          </div>
+
         </div>
       </div>
   );
