@@ -19,7 +19,7 @@ export default function RecipesCarousel() {
                 <div
                     key={i}
                     className="flex-shrink-0 w-48 flex flex-col items-center shadow-xl rounded-xl
-                    bg-cyan-950 bg-opacity-75 p-4 py-2 border-amber-100 border-2"
+                    bg-cyan-950 bg-opacity-75 pb-2 border-amber-100 border-2"
                 >
                   <div className="inline-flex items-center justify-center">
                     <img
