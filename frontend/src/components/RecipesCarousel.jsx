@@ -14,7 +14,7 @@ export default function RecipesCarousel() {
   return (
       <div className="p-6 overflow-hidden">
         <div className="carousel flex">
-          <div className="carousel-inner flex gap-4 animate-scroll">
+          <div className="carousel-inner flex gap-4 animate-scroll max-w-full">
             {[...recipeImages, ...recipeImages].map((img, i) => (
                 <div
                     key={i}

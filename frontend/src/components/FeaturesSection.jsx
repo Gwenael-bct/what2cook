@@ -12,17 +12,12 @@ export default function HeroSection() {
   ];
 
   return (
-      <div className="
-      bg-cyan-950 bg-opacity-75 w-full flex flex-col md:flex-row items-stretch gap-8"
-      >
-        <div className="container mx-auto flex flex-col md:flex-row items-stretch gap-8">
-          {/* 🔹 Colonne icônes */}
-          <div className="
-        w-full md:w-1/3 min-w-[320px]
-        flex items-center justify-center"
-          >
+      <div className="bg-cyan-950 bg-opacity-75 w-full flex justify-center">
+        <div className="container mx-auto flex flex-col md:flex-row gap-8">
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {/* 🔹 Colonne icônes */}
+          <div className="flex-1 md:flex-[1] flex items-center justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-full">
               {icons.map((item, i) => (
                   <div key={i} className="flex flex-col items-center p-4">
                     <div className="shadow-xl rounded-xl p-3 inline-flex items-center justify-center">
@@ -37,11 +32,12 @@ export default function HeroSection() {
           </div>
 
           {/* 🔹 Carrousel */}
-          <div className="w-full md:w-2/3">
+          <div className="flex-1 md:flex-[2] overflow-x-hidden">
             <RecipesCarousel />
           </div>
         </div>
       </div>
   );
 }
+
 
