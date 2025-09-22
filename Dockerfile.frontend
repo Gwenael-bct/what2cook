@@ -3,6 +3,8 @@
 # ---------------------
 FROM node:20-alpine AS base
 WORKDIR /app
+ARG REACT_APP_GOOGLE_CLIENT_ID
+ENV REACT_APP_GOOGLE_CLIENT_ID=$REACT_APP_GOOGLE_CLIENT_ID
 COPY frontend/package*.json ./
 RUN npm install
 

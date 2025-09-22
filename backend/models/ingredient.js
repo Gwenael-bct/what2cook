@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         as: 'recipes'
       });
 
+      Ingredient.belongsTo(models.Category, { foreignKey: 'category_id' });
+
       // Un ingrédient peut être dispo dans plusieurs cuisines d'utilisateurs
       this.belongsToMany(models.User, {
         through: models.UserIngredient,
@@ -22,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ingredient.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Ingredient',

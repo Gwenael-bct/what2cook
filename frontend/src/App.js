@@ -7,10 +7,9 @@ import HomePage from './pages/HomePage';
 
 function App() {
   return (
-      <div className="App bg-white">
-        {/*<Header />*/}
-        <HomePage />
-      </div>
+        <div className="App bg-white">
+          <HomePage />
+        </div>
   );
 }
 
