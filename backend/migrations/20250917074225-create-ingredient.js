@@ -9,11 +9,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      name_en: {
         type: Sequelize.STRING
       },
-      image: {
-        type: Sequelize.STRING
+      name_fr: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      spoonacular_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

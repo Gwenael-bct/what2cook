@@ -1,10 +1,24 @@
-await queryInterface.addColumn('ingredients', 'category_id', {
-  type: Sequelize.INTEGER,
-  allowNull: true,
-  references: {
-    model: 'categories', // nom exact de la table
-    key: 'id'
-  },
-  onUpdate: 'CASCADE',
-  onDelete: 'SET NULL'
-});
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Category = sequelize.define('Category', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
+  }, {
+    tableName: 'categories'
+  });
+
+  Category.associate = function(models) {
+    Category.hasMany(models.Ingredient, {
+      foreignKey: 'category_id',
+      as: 'ingredients'
+    });
+  };
+
+  return Category;
+};
