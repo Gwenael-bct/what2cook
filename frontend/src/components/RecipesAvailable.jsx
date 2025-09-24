@@ -1,4 +1,14 @@
+import { useState, useEffect } from "react";
+
 export default function RecipesAvailable() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/categories")
+        .then((res) => res.json())
+        .then((data) => setCategories(data));
+  }, []);
+
   return (
       <div className="bg-cyan-950 bg-opacity-75 w-full flex justify-center py-8">
         <div className="container mx-auto flex flex-col md:flex-row gap-8 bg-stone-100 rounded-xl">
@@ -8,17 +18,16 @@ export default function RecipesAvailable() {
             <h2 className="font-bold text-black pb-4 pt-8">Vos ingrédients</h2>
             <div className="rounded-xl p-2 bg-white shadow-2xl grid grid-cols-1 table-auto">
 
-              {Array.from({ length: 5 }).map((_, i) => (
-                  <div className="flex items-center justify-center border-b border-b-gray-200 h-10">
+              {categories.map((row, index) => (
+                  <div
+                      key={index}
+                      className="flex items-center border-b border-gray-200 h-10"
+                  >
 
-                    <span
-                        key={i}
-                        className="text-center text-black text-sm md:text-base font-medium"
-                    >
-                      {i}
-                    </span>
+                <span className="text-black text-sm md:text-base font-medium">
+                  {row.name}
+                </span>
                   </div>
-
               ))}
 
             </div>

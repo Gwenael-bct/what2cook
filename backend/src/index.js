@@ -30,6 +30,17 @@ app.get('/', (req, res) => {
   res.send('Backend is running!');
 });
 
+// Route API pour récupérer les ingrédients
+app.get("/categories", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM categories");
+    res.json(result.rows); // [{nom: "Tomate"}, {nom: "Fromage"}, ...]
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Erreur serveur");
+  }
+});
+
 const userIngredientsRoutes = require('./routes/userIngredients');
 app.use('/api/user-ingredients', userIngredientsRoutes);
 
