@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
       <header
           className="
@@ -12,6 +16,12 @@ export default function Header() {
 
         <nav className="flex gap-6 text-white font-medium">
           <a href="#" className="hover:text-orange-400">Home</a>
+          <button
+              onClick={() => navigate("/inventaire")}
+              className="hover:text-orange-400"
+          >
+            Inventaire
+          </button>
           <a href="#" className="hover:text-orange-400">Recipes</a>
           <a href="#" className="hover:text-orange-400">About</a>
         </nav>

@@ -21,12 +21,17 @@ export default function RecipesAvailable() {
               {categories.map((row, index) => (
                   <div
                       key={index}
-                      className="flex items-center border-b border-gray-200 h-10"
+                      className="flex items-center border-b border-gray-200 gap-3 p-2"
                   >
-
-                <span className="text-black text-sm md:text-base font-medium">
-                  {row.name}
-                </span>
+                    <div className="h-12 md:h-16 w-12 md:w-16 rounded-full overflow-hidden flex items-center justify-center">
+                      <img
+                          src={row.image}
+                          className="h-full w-full object-cover bg-gray-200"
+                      />
+                    </div>
+                    <span className="text-black text-sm md:text-base font-medium">
+                      {row.name}
+                    </span>
                   </div>
               ))}
 
