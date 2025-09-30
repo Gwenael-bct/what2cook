@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CurrentUser from "./CurrentUser";
-import ConnectCategory from "./ConnectCategory";
-import NotConnectedCategory from "./NotConnectedCategory";
+import Category from "./Category";
 
 export function RecipesAvailable() {
   const [user, setUser] = useState(null);
@@ -19,15 +18,7 @@ export function RecipesAvailable() {
               <CurrentUser onUserLoaded={setUser} />
 
               {/* Affichage sécurisé */}
-              <div>{user ? user.id : "Loading..."}</div>
-
-              {user ? (
-                  // Si user connecté → affiche ses catégories
-                  <ConnectCategory userId={user.id} />
-              ) : (
-                  // Sinon → affiche composants pour non-connecté
-                  <NotConnectedCategory />
-              )}
+               <Category userId={user?.id} />
             </div>
           </div>
 

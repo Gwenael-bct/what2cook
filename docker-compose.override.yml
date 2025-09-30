@@ -12,12 +12,12 @@ services:
       WATCHPACK_POLLING: true
     volumes:
       - ./frontend:/app
-      - ./frontend/node_modules:/app/node_modules
+      - /app/node_modules
     ports:
       - "3000:3000"
     depends_on:
       - backend
-    command: sh -c "npm install && npm start"
+    command: sh -c "npm start"
 
   backend:
     environment:
@@ -30,5 +30,5 @@ services:
       JWT_SECRET: ${JWT_SECRET:-devsecret}
     volumes:
       - ./backend:/app
-      - ./backend/node_modules:/app/node_modules
-    command: sh -c "npm install && npx sequelize-cli db:migrate && npm run dev"
+      - /app/node_modules
+    command: sh -c "npx sequelize-cli db:migrate && npm run dev"

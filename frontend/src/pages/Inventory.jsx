@@ -1,8 +1,5 @@
 import React from 'react';
-import FeaturesSection from '../components/FeaturesSection';
-import HeroSection from '../components/HeroSection';
-import {RecipesAvailable} from "../components/RecipesAvailable";
-import GoogleLogin from "../components/GoogleSignIn";
+// import GoogleLogin from "../components/GoogleSignIn";
 
 export default function Inventory() {
 

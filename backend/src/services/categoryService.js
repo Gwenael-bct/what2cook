@@ -9,6 +9,7 @@ async function getCategoriesWithUserIngredients(userId) {
     image: c.image,
     ingredients: c.ingredients.map(i => ({
       name: i.name_fr,
+      name_en: i.name_en,
     }))
   }));
 }

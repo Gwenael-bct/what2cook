@@ -3,43 +3,37 @@
 
 const fs = require('fs');
 const path = require('path');
-const csv = require('csv-parser');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const ingredients = [];
 
-    const csvFilePath = path.resolve(__dirname, '../data/ingredients.csv');
+    const jsonFilePath = path.resolve(__dirname, '../data/ingredients_mapping.json');
 
-    if (!fs.existsSync(csvFilePath)) {
-      console.log('[ingredients migration] CSV introuvable, insertion ignorée:', csvFilePath);
+    if (!fs.existsSync(jsonFilePath)) {
+      console.log('[ingredients migration] JSON introuvable, insertion ignorée:', jsonFilePath);
       return;
     }
 
-    await new Promise((resolve, reject) => {
-      fs.createReadStream(csvFilePath)
-          .pipe(csv())
-          .on('data', (row) => {
-            const nameEn = (row.name_en || '').trim();
-            const nameFr = (row.name_fr || '').trim();
-            if (!nameEn && !nameFr) return; // au moins un nom requis
-            const spoonacularId = row.spoonacular_id ? parseInt(row.spoonacular_id, 10) : null;
-            const categoryId = row.category_id ? parseInt(row.category_id, 10) : null;
-            ingredients.push({
-              name_en: nameEn || null,
-              name_fr: nameFr || null,
-              spoonacular_id: spoonacularId,
-              category_id: categoryId,
-              createdAt: new Date(),
-              updatedAt: new Date()
-            });
-          })
-          .on('end', () => resolve())
-          .on('error', (err) => reject(err));
-    });
+    const rawData = fs.readFileSync(jsonFilePath, 'utf-8');
+    let ingredientsData;
+    try {
+      ingredientsData = JSON.parse(rawData);
+    } catch (err) {
+      console.error('[ingredients migration] Erreur parsing JSON:', err);
+      return;
+    }
+
+    const ingredients = ingredientsData.map((item) => ({
+      name_en: (item.name || '').trim() || null,
+      name_fr: (item.name_fr || '').trim() || null,
+      category_id: item.category || null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }));
 
     if (ingredients.length > 0) {
       await queryInterface.bulkInsert('Ingredients', ingredients);
+      console.log(`[ingredients migration] ${ingredients.length} ingrédients insérés.`);
     }
   },
 

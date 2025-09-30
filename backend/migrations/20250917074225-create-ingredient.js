@@ -16,10 +16,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
-      spoonacular_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
