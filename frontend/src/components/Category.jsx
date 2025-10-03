@@ -82,22 +82,26 @@ export default function Category({ userId }) {
                   {userId && openCategory === row.id && row?.ingredients?.length > 0 && (
                       <div
                           id={`dropdown-${row.id ?? index}`}
-                          className="z-10 bg-white border-gray-200 p-2 hover:shadow-md rounded"
+                          className="z-10 bg-white border-gray-200 p-2"
                       >
                         <ul
-                            className="py-2 text-sm"
+                            className="py-2 text-sm grid grid-cols-2 gap-4 justify-items-center border border-xl rounded rounded-xl bg-gray-200"
                             aria-labelledby={`dropdownButton-${row.id ?? index}`}
                         >
                           {row.ingredients.map((ingredient) => (
-                              <li key={ingredient._key} className="flex items-center gap-2 my-1">
-                                <img
-                                    src={ingredient.imageUrl}
-                                    alt={ingredient.name}
-                                    className="h-12 md:h-16 w-12 md:w-16 rounded-full object-cover bg-gray-100"
-                                />
-                                <span className="text-black text-sm md:text-base font-medium">
-                        {ingredient.name}
-                      </span>
+                              <li key={ingredient._key} className="gap-2 my-1 hover:shadow-md rounded rounded-xl">
+
+                                <div className="flex flex-col items-center w-full max-w-full rounded rounded-xl bg bg-black">
+                                  <img
+                                      src={ingredient.imageUrl}
+                                      alt={ingredient.name}
+                                      className="h-10 md:h-12 w-10 md:w-12 rounded-full object-cover bg-gray-100"
+                                  />
+                                  <span className="text-black text-sm md:text-base font-medium">
+                                    {ingredient.name}
+                                  </span>
+                                </div>
+
                               </li>
                           ))}
                         </ul>
