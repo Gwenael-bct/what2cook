@@ -1,9 +1,11 @@
 import { useState } from "react";
 import CurrentUser from "./CurrentUser";
 import Category from "./Category";
+import {useNavigate} from "react-router-dom";
 
 export function RecipesAvailable() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   return (
       <div className="bg-cyan-950 bg-opacity-75 w-full flex justify-center py-8">
@@ -19,6 +21,14 @@ export function RecipesAvailable() {
 
               {/* Affichage sécurisé */}
                <Category userId={user?.id} />
+
+              {/* Bouton navigation vers l'inventaire */}
+              <button
+                  onClick={() => navigate("/inventaire")}
+                  className="hover:bg-orange-500 text-white  bg-black justify-self-center rounded-full mt-4 p-4"
+              >
+                Ajouter/Supprimer des ingrédients
+              </button>
             </div>
           </div>
 

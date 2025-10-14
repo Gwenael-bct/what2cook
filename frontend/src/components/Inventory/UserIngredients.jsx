@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 
-export default function Category({ userId }) {
+export default function UserIngredients({ userId }) {
   const [categories, setCategories] = useState([]);
-  const [openCategory, setOpenCategory] = useState(null);
+  const [openCategory, setOpenCategory] = useState(true);
 
-  const request = userId
-      ? `http://localhost:5000/categories/user/${userId}`
-      : "http://localhost:5000/categories/all";
+  const request = `http://localhost:5000/categories/user/${userId}`;
 
   useEffect(() => {
     fetch(request)

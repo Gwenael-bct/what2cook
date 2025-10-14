@@ -7,7 +7,7 @@ import GoogleLogin from "../components/GoogleSignIn";
 export default function HomePage() {
 
   return (
-      <main className="min-h-screen bg-black p-4 md:p-8">
+      <main className="min-h-screen bg-[#121212] p-4 md:p-8">
         {/*<HeroSection />*/}
         {/*<FeaturesSection />*/}
         <RecipesAvailable />

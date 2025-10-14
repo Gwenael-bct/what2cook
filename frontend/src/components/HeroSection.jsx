@@ -4,6 +4,7 @@ export default function HeroSection() {
   return (
       <div
           className="
+          min-h-screen
           bg-contain relative
           flex flex-col justify-center items-center
           aspect-[3072/1344]
