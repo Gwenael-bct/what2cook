@@ -11,8 +11,16 @@ export default function Inventory() {
 
   return (
       <main className="min-h-screen bg-[#121212] p-4 md:p-8">
-        <Header />
-        <div className="mt-24 rounded-2xl shadow-xl bg-[#1E1E1E] px-12 py-8">
+
+        {/*<Header />*/}
+
+        <CurrentUser onUserLoaded={setUser} />
+
+        <div className="mt-24 rounded-2xl shadow-xl bg-[#1E1E1E] px-20 py-8 m-48">
+
+          {user &&
+            <p className="text-white font-bold text-center text-4xl">Bienvenue {user.username.split(" ")[0]}</p>
+          }
 
           {/* Titre + ajout d'ingrédient */}
           <div className="flex justify-between py-8">
@@ -22,7 +30,7 @@ export default function Inventory() {
               <div className="text-gray-200 font-semibold text-xl">Ajouter un ingrédient</div>
 
               {/* Champ ingrédient */}
-              <div className="flex items-center bg-white/5 rounded-xl px-5 py-2">
+              <div className="flex items-center bg-white/10 rounded-xl px-5 py-2">
                 <SearchIcon className="text-gray-400" />
                 <input
                     placeholder="Nom de l'ingrédient..."
@@ -31,7 +39,7 @@ export default function Inventory() {
               </div>
 
               {/* Champ quantité */}
-              <div className="flex items-center bg-white/5 rounded-xl px-5 py-2">
+              <div className="flex items-center bg-white/10 rounded-xl px-5 py-2">
                 <SearchIcon className="text-gray-400" />
                 <input
                     placeholder="Quantité"
@@ -39,19 +47,19 @@ export default function Inventory() {
                     className="text-gray-100 font-medium flex-1 bg-transparent p-2 outline-none"
                 />
               </div>
-
-              {/* Bouton ajouter */}
-              <button className="bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-xl py-2 shadow-lg shadow-blue-500/20">
-                + Ajouter à l’inventaire
-              </button>
             </div>
           </div>
 
-          {/* Ici tu affiches ton inventaire utilisateur */}
-          <CurrentUser onUserLoaded={setUser} />
-          <UserIngredients userId={user?.id} />
-          <GoogleLogin />
+          {user &&
+              <div className="p-4">
+                <UserIngredients userId={user?.id} />
+              </div>
+          }
 
+          <div className="text-center text-white font-medium gap-2 text-xl pt-8">
+            <GoogleLogin />
+
+          </div>
         </div>
       </main>
   );

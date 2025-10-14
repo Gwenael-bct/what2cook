@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import { motion } from "framer-motion";
 
 export default function UserIngredients({ userId }) {
   const [categories, setCategories] = useState([]);
-  const [openCategory, setOpenCategory] = useState(true);
 
   const request = `http://localhost:5000/categories/user/${userId}`;
 
   useEffect(() => {
+    if (!userId) return;
+    const request = `http://localhost:5000/categories/user/${userId}`;
     fetch(request)
-        .then((res) => res.json())
+        .then(res => res.json())
         .then((data) => {
-          // Ajout de l'image directement dans chaque ingrédient
           const categoriesWithImages = (data || []).map((category) => ({
             ...category,
             ingredients: (category.ingredients || []).map((ingredient, i) => ({
@@ -18,7 +21,7 @@ export default function UserIngredients({ userId }) {
               imageUrl: `https://www.themealdb.com/images/ingredients/${encodeURIComponent(
                   ingredient.name_en
               )}-Small.png`,
-              _key: ingredient.id ?? i, // fallback pour clé unique
+              _key: ingredient.id ?? i,
             })),
           }));
           setCategories(categoriesWithImages);
@@ -26,90 +29,77 @@ export default function UserIngredients({ userId }) {
         .catch((err) => console.error(err));
   }, [userId]);
 
-  const toggleCategory = (id) => {
-    setOpenCategory(openCategory === id ? null : id);
-  };
-
   return (
-      <>
-        {categories.map((row, index) =>
-            row ? (
-                <div key={row.id ?? index}>
-                  <button
-                      id={`dropdownButton-${row.id ?? index}`}
-                      data-dropdown-toggle={`dropdown-${row.id ?? index}`}
-                      className="flex items-center justify-between w-full border-b border-gray-200 p-2 hover:shadow-md rounded"
-                      type="button"
-                      onClick={() => toggleCategory(row.id ?? index)}
-                  >
-                    {/* Groupe image + texte catégorie */}
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 md:h-16 w-12 md:w-16 rounded-full overflow-hidden flex items-center justify-center">
-                        <img
-                            src={row.image}
-                            alt={row.name}
-                            className="h-full w-full object-cover bg-gray-100"
-                            loading="lazy"
-                        />
-                      </div>
-                      <span className="text-black text-sm md:text-base font-medium">
-                  {row.name}
-                </span>
-                    </div>
-
-                    {/* Flèche dropdown */}
-                    <svg
-                        className={`w-4 h-4 text-gray-500 mr-6 transform transition-transform duration-300 ${
-                            openCategory === (row.id ?? index) ? "rotate-180" : "rotate-0"
-                        }`}
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 10 6"
-                    >
-                      <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m1 1 4 4 4-4"
+      <div className="rounded-xl overflow-hidden shadow-md bg-white">
+        <table className="table-auto w-full">
+          <thead className="bg-gray-200">
+          <tr>
+            <th className="pl-6 text-left">Catégorie</th>
+            <th className="pl-6 text-left">Ingrédient</th>
+            <th className="pl-6 text-left">Quantité</th>
+            <th className="text-center">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          {categories.map((category) =>
+              category.ingredients.map((ingredient, index) => (
+                  <tr key={ingredient._key}>
+                    {index === 0 && (
+                        <td rowSpan={category.ingredients.length} className="p-6 border-b align-center">
+                          <div className="flex items-center gap-2">
+                            {category.image && (
+                                <img
+                                    src={category.image}
+                                    alt={category.name}
+                                    className="h-14 w-14 rounded-full object-cover bg-gray-100"
+                                />
+                            )}
+                            <span className="pl-4 font-medium">{category.name}</span>
+                          </div>
+                        </td>
+                    )}
+                    <td className="p-6 align-center border">
+                      <img
+                          src={ingredient.imageUrl}
+                          alt={ingredient.name}
+                          className="h-10 w-10 rounded-full object-cover bg-gray-100"
                       />
-                    </svg>
-                  </button>
-
-                  {/* Dropdown ingrédients */}
-                  {userId && openCategory === row.id && row?.ingredients?.length > 0 && (
-                      <div
-                          id={`dropdown-${row.id ?? index}`}
-                          className="z-10 bg-white border-gray-200 p-2"
-                      >
-                        <ul
-                            className="py-2 text-sm grid grid-cols-2 gap-4 justify-items-center border border-xl rounded rounded-xl bg-gray-200"
-                            aria-labelledby={`dropdownButton-${row.id ?? index}`}
+                      <span className="font-medium">{ingredient.name}</span>
+                    </td>
+                    <td className="p-6 border font-medium">
+                      {Math.floor(Math.random() * 500) + 1}
+                    </td>
+                    <td className="p-6 text-center border-b">
+                      <div className="grid grid-cols-2 text-center">
+                        <motion.div
+                            whileHover={{ scale: 1.25, color: "#3b82f6" }} // #3b82f6 = Tailwind blue-500
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 200, damping: 8 }}
+                            className="relative cursor-pointer"
                         >
-                          {row.ingredients.map((ingredient) => (
-                              <li key={ingredient._key} className="gap-2 my-1 hover:shadow-md rounded rounded-xl">
+                          {/* Halo animé */}
+                          <motion.span
+                              className="absolute inset-0 rounded-full bg-blue-300 opacity-0 blur-md"
+                              whileHover={{ opacity: 0.4, scale: 1.5 }}
+                              transition={{ duration: 0.3 }}
+                          />
+                          <AddIcon fontSize="large" className="text-blue-500 relative z-10" />
+                        </motion.div>
 
-                                <div className="flex flex-col items-center w-full max-w-full rounded rounded-xl">
-                                  <img
-                                      src={ingredient.imageUrl}
-                                      alt={ingredient.name}
-                                      className="h-10 md:h-12 w-10 md:w-12 rounded-full object-cover bg-gray-100"
-                                      loading="lazy"
-                                  />
-                                  <span className="text-black text-sm md:text-base font-medium">
-                                    {ingredient.name}
-                                  </span>
-                                </div>
-
-                              </li>
-                          ))}
-                        </ul>
+                        <motion.div
+                            whileHover={{ scale: 1.2, rotate: 10 }}
+                            whileTap={{ scale: 0.9 }}
+                            transition={{ type: "spring", stiffness: 150 }}
+                        >
+                          <DeleteIcon fontSize="large" className="text-red-500 cursor-pointer" />
+                        </motion.div>
                       </div>
-                  )}
-                </div>
-            ) : null
-        )}
-      </>
+                    </td>
+                  </tr>
+              ))
+          )}
+          </tbody>
+        </table>
+      </div>
   );
 }

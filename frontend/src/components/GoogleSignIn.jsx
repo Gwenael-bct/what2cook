@@ -21,6 +21,21 @@ export default function GoogleSignIn() {
     fetchMe();
   }, []);
 
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const decoded = jwtDecode(credentialResponse.credential);
+      await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ credential: credentialResponse.credential })
+      });
+      setUser({ name: decoded.name, email: decoded.email, picture: decoded.picture });
+    } catch (e) {
+      console.log("Échec de la connexion", e);
+    }
+  }
+
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
@@ -33,26 +48,16 @@ export default function GoogleSignIn() {
       <div>
         {!user ? (
             <GoogleLogin
-                onSuccess={async (credentialResponse) => {
-                  try {
-                    const decoded = jwtDecode(credentialResponse.credential);
-                    await fetch('/api/auth/google', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      credentials: 'include',
-                      body: JSON.stringify({ credential: credentialResponse.credential })
-                    });
-                    setUser({ name: decoded.name, email: decoded.email, picture: decoded.picture });
-                  } catch (e) {
-                    console.log("Échec de la connexion", e);
-                  }
-                }}
+                onSuccess={handleGoogleSuccess}
                 onError={() => console.log("Échec de la connexion")}
             />
         ) : (
             <div>
-              <p>Bienvenue {user.username || user.name}</p>
-              <button onClick={handleLogout}>Se déconnecter</button>
+              <button onClick={handleLogout}
+                      className="rounded-full bg-white/10 hover:bg-orange-500 m-4 p-4 font-medium"
+              >
+                Se déconnecter
+              </button>
             </div>
         )}
       </div>

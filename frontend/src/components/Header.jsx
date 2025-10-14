@@ -15,7 +15,7 @@ export default function Header() {
         {/* Navigation vers l'inventaire de l'utilisateur */}
         <h1
             onClick={() => navigate("/")}
-            className="text-white font-bold text-4xl hover:text-orange-500"
+            className="text-white font-bold text-4xl hover:text-orange-500 cursor-pointer"
         >
           What2Cook
         </h1>

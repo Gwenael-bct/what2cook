@@ -11,5 +11,5 @@ export default function CurrentUser({ onUserLoaded }) {
         .catch(err => console.error(err));
   }, [onUserLoaded]);
 
-  return null; // ne render rien
+  return null;
 }
