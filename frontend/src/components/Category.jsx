@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 
-export default function Category({ userId }) {
+export default function Category({ userId, handleClick}) {
   const [categories, setCategories] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
 
   const request = userId
       ? `http://localhost:5000/categories/user/${userId}`
       : "http://localhost:5000/categories/all";
+
+  const handleIngredientClick = (ingredient) => {
+    handleClick(ingredient);
+  };
 
   useEffect(() => {
     fetch(request)
@@ -96,8 +100,9 @@ export default function Category({ userId }) {
                                   <img
                                       src={ingredient.imageUrl}
                                       alt={ingredient.name}
-                                      className="h-10 md:h-12 w-10 md:w-12 rounded-full object-cover bg-gray-100"
+                                      className="h-10 md:h-12 w-10 md:w-12 rounded-full object-cover bg-gray-100 saturate-150"
                                       loading="lazy"
+                                      onClick={() => handleIngredientClick(ingredient.name_en)}
                                   />
                                   <span className="text-black text-sm md:text-base font-medium">
                                     {ingredient.name}

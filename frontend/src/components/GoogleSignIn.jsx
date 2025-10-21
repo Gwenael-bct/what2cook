@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
-export default function GoogleSignIn() {
+export default function GoogleSignIn({ onLoginSuccess, onLogoutSuccess, colorButton }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -31,6 +31,7 @@ export default function GoogleSignIn() {
         body: JSON.stringify({ credential: credentialResponse.credential })
       });
       setUser({ name: decoded.name, email: decoded.email, picture: decoded.picture });
+      if (onLoginSuccess) onLoginSuccess();
     } catch (e) {
       console.log("Échec de la connexion", e);
     }
@@ -42,6 +43,7 @@ export default function GoogleSignIn() {
     } catch (e) {}
     googleLogout();
     setUser(null);
+    if (onLogoutSuccess) onLogoutSuccess();
   };
 
   return (
@@ -54,7 +56,7 @@ export default function GoogleSignIn() {
         ) : (
             <div>
               <button onClick={handleLogout}
-                      className="rounded-full bg-white/10 hover:bg-orange-500 m-4 p-4 font-medium"
+                      className={`rounded-full ${colorButton} hover:bg-orange-500 m-4 p-4 font-medium`}
               >
                 Se déconnecter
               </button>

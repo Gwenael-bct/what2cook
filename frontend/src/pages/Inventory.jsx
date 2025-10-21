@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 import SearchIcon from '@mui/icons-material/Search';
-import GoogleLogin from "../components/GoogleSignIn";
 import { useState } from "react";
 import CurrentUser from "../components/CurrentUser";
 import UserIngredients from "../components/Inventory/UserIngredients";
+import ReloadUser from "../services/ReloadUser";
 
 export default function Inventory() {
   const [user, setUser] = useState(null);
@@ -57,7 +57,7 @@ export default function Inventory() {
           }
 
           <div className="text-center text-white font-medium gap-2 text-xl pt-8">
-            <GoogleLogin />
+            <ReloadUser onUserLoaded={setUser} colorButton="bg-white/10" />
 
           </div>
         </div>

@@ -1,19 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const { Category } = require('../../models');
-const categoryController = require('../controllers/categoryController');
 
-// Récupérer les catégories + ingrédients de l’utilisateur
-router.get('/user/:userId', categoryController.getUserCategories);
+router.get('/by-main-ingredient/:ingredient', async (req, res) => {
+  const ingredient = req.params.ingredient;
+  const apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
 
-// Récupérer toutes les catégories
-router.get("/all", async (req, res) => {
   try {
-    const categories = await Category.findAll();
-    res.json(categories);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Erreur serveur");
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des données");
+    }
+
+    const data = await response.json();
+
+    res.json(data.meals);
+  } catch (error) {
+    console.error("Erreur:", error);
+    res.status(500).json({ error: error.message });
   }
 });
 

@@ -11,7 +11,6 @@ export default function HomePage() {
         {/*<HeroSection />*/}
         {/*<FeaturesSection />*/}
         <RecipesAvailable />
-        <GoogleLogin />
       </main>
   )
 }
