@@ -30,11 +30,16 @@ app.get('/', (req, res) => {
   res.send('Backend is running!');
 });
 
-const userIngredientsRoutes = require('./routes/userIngredients');
-app.use('/api/user-ingredients', userIngredientsRoutes);
+// Route API pour récupérer les routes de catégorie
+const categoryRoutes = require('./routes/category');
+app.use('/categories', categoryRoutes);
 
+// Route pour les service de connexion de Google
 const authGoogleRoutes = require('./routes/authGoogle');
 app.use('/api/auth', authGoogleRoutes);
+
+const recipesRoutes = require('./routes/recipes');
+app.use('/recettes/', recipesRoutes);
 
 app.listen(port, () => {
   console.log(`Backend listening on port ${port}`);

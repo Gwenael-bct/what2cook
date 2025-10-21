@@ -1,7 +1,6 @@
 const express = require('express');
 const { OAuth2Client } = require('google-auth-library');
 const jwt = require('jsonwebtoken');
-// Chemin depuis src/routes jusqu'à models
 const { User } = require('../../models');
 const authenticateJwt = require('../middlewares/auth');
 const router = express.Router();

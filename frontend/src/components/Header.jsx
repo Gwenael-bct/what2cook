@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
       <header
           className="
@@ -8,12 +12,34 @@ export default function Header() {
         z-20
       "
       >
-        <h1 className="text-white text-2xl font-bold hover:text-orange-500">What2Cook</h1>
+        {/* Navigation vers l'inventaire de l'utilisateur */}
+        <h1
+            onClick={() => navigate("/")}
+            className="text-white font-bold text-4xl hover:text-orange-500 cursor-pointer"
+        >
+          What2Cook
+        </h1>
 
         <nav className="flex gap-6 text-white font-medium">
-          <a href="#" className="hover:text-orange-400">Home</a>
-          <a href="#" className="hover:text-orange-400">Recipes</a>
-          <a href="#" className="hover:text-orange-400">About</a>
+
+          {/* Navigation vers l'inventaire de l'utilisateur */}
+          <button
+              onClick={() => navigate("/")}
+              className="hover:text-orange-400 text-2xl"
+          >
+            Acceuil
+          </button>
+
+          {/* Navigation vers l'inventaire de l'utilisateur */}
+          <button
+              onClick={() => navigate("/inventaire")}
+              className="hover:text-orange-400 text-2xl"
+          >
+            Inventaire
+          </button>
+
+          <a href="#" className="hover:text-orange-400 text-2xl">Recettes</a>
+          <a href="#" className="hover:text-orange-400 text-2xl">A propos</a>
         </nav>
       </header>
   );

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'recipes'
       });
 
-      Ingredient.belongsTo(models.Category, { foreignKey: 'category_id' });
+      this.belongsTo(models.Category, { foreignKey: 'category_id' });
 
       // Un ingrédient peut être dispo dans plusieurs cuisines d'utilisateurs
       this.belongsToMany(models.User, {
@@ -23,12 +23,32 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
+
+  Ingredient.getById = async function(id) {
+    return await Ingredient.findByPk(id);
+  };
+
   Ingredient.init({
-    name: DataTypes.STRING,
-    image: DataTypes.STRING
+    name_en: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    name_fr: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    spoonacular_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    category_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'Ingredient',
+    tableName: 'Ingredients'
   });
   return Ingredient;
 };

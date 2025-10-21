@@ -1,15 +1,17 @@
 import React from 'react';
 import './index.css';
-// import UserIngredientsForm from './components/UserIngredientsForm';
-// import Header from './pages/Header';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
-// import Header from './pages/Header';
+import Inventory from "./pages/Inventory";
 
 function App() {
   return (
-        <div className="App bg-white">
-          <HomePage />
-        </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/inventaire" element={<Inventory />} />
+        </Routes>
+      </Router>
   );
 }
 
