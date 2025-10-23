@@ -85,30 +85,25 @@ export default function Category({ userId, handleClick}) {
 
                   {/* Dropdown ingrédients */}
                   {userId && openCategory === row.id && row?.ingredients?.length > 0 && (
-                      <div
-                          id={`dropdown-${row.id ?? index}`}
-                          className="z-10 bg-white border-gray-200 p-2"
-                      >
-                        <ul
-                            className="py-2 text-sm grid grid-cols-2 gap-4 justify-items-center border border-xl rounded rounded-xl bg-gray-200"
-                            aria-labelledby={`dropdownButton-${row.id ?? index}`}
-                        >
+                      <div className="mt-2 p-2 bg-gray-50 rounded-lg shadow-inner">
+                        <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6">
                           {row.ingredients.map((ingredient) => (
-                              <li key={ingredient._key} className="gap-2 my-1 hover:shadow-md rounded rounded-xl">
-
-                                <div className="flex flex-col items-center w-full max-w-full rounded rounded-xl">
-                                  <img
-                                      src={ingredient.imageUrl}
-                                      alt={ingredient.name}
-                                      className="h-10 md:h-12 w-10 md:w-12 rounded-full object-cover bg-gray-100 saturate-150"
-                                      loading="lazy"
-                                      onClick={() => handleIngredientClick(ingredient.name_en)}
-                                  />
-                                  <span className="text-black text-sm md:text-base font-medium">
+                              <li key={ingredient._key}>
+                                <div
+                                    className="flex flex-col items-center gap-2 cursor-pointer group"
+                                    onClick={() => handleIngredientClick(ingredient.name_en)}
+                                >
+                                  <div className="h-14 w-14 md:h-16 md:w-16 rounded-full overflow-hidden bg-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                                    <img
+                                        src={ingredient.imageUrl}
+                                        alt={ingredient.name}
+                                        className="h-full w-full object-cover group-hover:scale-105 transition-transform saturate-150 duration-200"
+                                    />
+                                  </div>
+                                  <span className="text-xs md:text-sm text-center font-medium text-gray-800">
                                     {ingredient.name}
                                   </span>
                                 </div>
-
                               </li>
                           ))}
                         </ul>

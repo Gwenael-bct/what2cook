@@ -9,7 +9,7 @@ export default function Header() {
         absolute top-0 left-0 w-full
         flex items-center justify-between
         px-6 py-4
-        z-20
+        z-30
       "
       >
         {/* Navigation vers l'inventaire de l'utilisateur */}

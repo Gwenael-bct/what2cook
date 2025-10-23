@@ -12,7 +12,7 @@ export default function Inventory() {
   return (
       <main className="min-h-screen bg-[#121212] p-4 md:p-8">
 
-        {/*<Header />*/}
+        <Header />
 
         <CurrentUser onUserLoaded={setUser} />
 

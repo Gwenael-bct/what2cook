@@ -4,10 +4,10 @@ export default function HeroSection() {
   return (
       <div
           className="
-          min-h-screen
+          h-screen
           bg-contain relative
           flex flex-col justify-center items-center
-          aspect-[3072/1344]
+          z-0
         "
           style={{
             backgroundImage: "url('/assets/images/homePage/hero_banner.webp')",

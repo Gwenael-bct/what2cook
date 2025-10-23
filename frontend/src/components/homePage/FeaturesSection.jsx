@@ -1,8 +1,8 @@
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import IconCard from './IconCard';
-import RecipesCarousel from './RecipesCarousel';
+import IconCard from '../IconCard';
+import RecipesCarousel from '../RecipesCarousel';
 
 export default function HeroSection() {
   const icons = [
@@ -12,7 +12,7 @@ export default function HeroSection() {
   ];
 
   return (
-      <div className="bg-cyan-950 bg-opacity-75 w-full flex justify-center">
+      <div className="bg-neutral-900 w-full flex justify-center">
         <div className="container mx-auto flex flex-col md:flex-row gap-8">
 
           {/* 🔹 Colonne icônes */}

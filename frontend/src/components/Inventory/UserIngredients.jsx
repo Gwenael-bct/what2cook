@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 export default function UserIngredients({ userId }) {
   const [categories, setCategories] = useState([]);
 
-  const request = `http://localhost:5000/categories/user/${userId}`;
-
   useEffect(() => {
     if (!userId) return;
     const request = `http://localhost:5000/categories/user/${userId}`;

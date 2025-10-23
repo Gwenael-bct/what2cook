@@ -1,7 +1,8 @@
 import React from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-export default function Recipes({ recipes }) {
+export default function Recipes({ recipes, onRecipeClick }) {
+
   return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         {recipes.map((row, index) =>
@@ -12,6 +13,7 @@ export default function Recipes({ recipes }) {
                     hover:shadow-2xl transform hover:-translate-y-1
                     transition-all duration-300 ease-out group
                     "
+                    onClick={() => onRecipeClick(row.idMeal)}
                 >
                   <img
                       src={row.strMealThumb}
