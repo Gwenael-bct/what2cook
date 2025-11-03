@@ -27,7 +27,7 @@ export default function Inventory() {
             <div className="text-white font-bold text-4xl">Gérer Mon Inventaire</div>
 
             <div className="grid grid-cols-1 gap-4">
-              <div className="text-gray-200 font-semibold text-xl">Ajouter un ingrédient</div>
+              <div className="text-gray-200 font-semibold text-2xl">Ajouter un ingrédient</div>
 
               {/* Champ ingrédient */}
               <div className="flex items-center bg-white/10 rounded-xl px-5 py-2">

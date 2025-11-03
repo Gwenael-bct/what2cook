@@ -7,6 +7,7 @@ import { RecipesByMainIngredient, getRecipesCache } from '../../services/Recipes
 import Recipes from "./Recipes"
 import { RecipeDetailsService, getRecipeDetailsCache } from '../../services/RecipeDetails';
 import RecipeDetails from "./RecipeDetails";
+import { useRef } from "react";
 
 export function RecipesAvailable({ onRecipeSelected }) {
   const [user, setUser] = useState(null);
@@ -15,6 +16,12 @@ export function RecipesAvailable({ onRecipeSelected }) {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  const targetRef = useRef(null);
+
+  const handleScroll = () => {
+    targetRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const handleClickRecipe = async (id) => {
     setLoading(true);
@@ -48,10 +55,12 @@ export function RecipesAvailable({ onRecipeSelected }) {
   return (
       <>
         <div className="grid grid-cols-1 bg-neutral-900 w-full justify-center py-8 relative">
-          <div className={"container mx-auto flex flex-col md:flex-row gap-8 bg-stone-100 rounded-xl relative"}>
+          <div className="container mx-auto flex flex-col md:flex-row gap-8 bg-stone-100 rounded-xl relative">
             {/* RecipeDetails collé par le bas au haut du container blanc */}
             {recipeDetails && (
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 z-50">
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-full md:w-3/4 px-4 z-50"
+                   ref={targetRef}
+              >
                 <RecipeDetails recipeDetails={recipeDetails} onClose={handleCloseRecipe} />
               </div>
             )}
@@ -89,7 +98,7 @@ export function RecipesAvailable({ onRecipeSelected }) {
               )}
 
               <div>
-                <Recipes recipes={recipes} onRecipeClick={handleClickRecipe} />
+                <Recipes recipes={recipes} onRecipeClick={handleClickRecipe} handleScroll={handleScroll} />
               </div>
             </div>
           </div>

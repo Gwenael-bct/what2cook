@@ -34,7 +34,7 @@ export default function UserIngredients({ userId }) {
           <tr>
             <th className="pl-6 text-left">Catégorie</th>
             <th className="pl-6 text-left">Ingrédient</th>
-            <th className="pl-6 text-left">Quantité</th>
+            {/*<th className="pl-6 text-left">Quantité</th>*/}
             <th className="text-center">Action</th>
           </tr>
           </thead>
@@ -64,25 +64,25 @@ export default function UserIngredients({ userId }) {
                       />
                       <span className="font-medium">{ingredient.name}</span>
                     </td>
-                    <td className="p-6 border font-medium">
-                      {Math.floor(Math.random() * 500) + 1}
-                    </td>
+                    {/*<td className="p-6 border font-medium">*/}
+                    {/*  {Math.floor(Math.random() * 500) + 1}*/}
+                    {/*</td>*/}
                     <td className="p-6 text-center border-b">
-                      <div className="grid grid-cols-2 text-center">
-                        <motion.div
-                            whileHover={{ scale: 1.25, color: "#3b82f6" }} // #3b82f6 = Tailwind blue-500
-                            whileTap={{ scale: 0.95 }}
-                            transition={{ type: "spring", stiffness: 200, damping: 8 }}
-                            className="relative cursor-pointer"
-                        >
-                          {/* Halo animé */}
-                          <motion.span
-                              className="absolute inset-0 rounded-full bg-blue-300 opacity-0 blur-md"
-                              whileHover={{ opacity: 0.4, scale: 1.5 }}
-                              transition={{ duration: 0.3 }}
-                          />
-                          <AddIcon fontSize="large" className="text-blue-500 relative z-10" />
-                        </motion.div>
+                      <div className="grid grid-cols-2 text-center justify-self-center">
+                        {/*<motion.div*/}
+                        {/*    whileHover={{ scale: 1.25, color: "#3b82f6" }} // #3b82f6 = Tailwind blue-500*/}
+                        {/*    whileTap={{ scale: 0.95 }}*/}
+                        {/*    transition={{ type: "spring", stiffness: 200, damping: 8 }}*/}
+                        {/*    className="relative cursor-pointer"*/}
+                        {/*>*/}
+                        {/*  /!* Halo animé *!/*/}
+                        {/*  <motion.span*/}
+                        {/*      className="absolute inset-0 rounded-full bg-blue-300 opacity-0 blur-md"*/}
+                        {/*      whileHover={{ opacity: 0.4, scale: 1.5 }}*/}
+                        {/*      transition={{ duration: 0.3 }}*/}
+                        {/*  />*/}
+                        {/*  <AddIcon fontSize="large" className="text-blue-500 relative z-10" />*/}
+                        {/*</motion.div>*/}
 
                         <motion.div
                             whileHover={{ scale: 1.2, rotate: 10 }}

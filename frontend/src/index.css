@@ -67,3 +67,29 @@ input[type=number] {
   animation: float 12s ease-in-out infinite;
 }
 
+/* Réduit le coût layout/paint pour les sections hors-écran */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
+}
+
+
+/* === Carousel smooth scroll */
+@keyframes carousel-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.carousel-scroll {
+  animation: carousel-scroll var(--scroll-duration, 25s) linear infinite;
+  will-change: transform;
+}
+
+.carousel-container:hover .carousel-scroll {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-scroll { animation: none !important; }
+}
+

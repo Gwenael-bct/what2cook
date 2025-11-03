@@ -7,6 +7,13 @@ const path = require('path');
 require('module-alias/register');
 
 const app = express();
+// Compression (optionnelle si non installée)
+try {
+  const compression = require('compression');
+  app.use(compression());
+} catch (e) {
+  console.warn('compression non installée - pour de meilleures perfs: npm i compression');
+}
 const port = 5000;
 
 // Middleware

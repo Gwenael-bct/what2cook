@@ -7,12 +7,11 @@ export default function HeroSection() {
           h-screen
           bg-contain relative
           flex flex-col justify-center items-center
-          z-0
         "
           style={{
             backgroundImage: "url('/assets/images/homePage/hero_banner.webp')",
             backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundPosition: 'top'
           }}
       >
         <Header />
