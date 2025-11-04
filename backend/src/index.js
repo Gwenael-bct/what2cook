@@ -7,20 +7,14 @@ const path = require('path');
 require('module-alias/register');
 
 const app = express();
-// Compression (optionnelle si non installée)
-try {
-  const compression = require('compression');
-  app.use(compression());
-} catch (e) {
-  console.warn('compression non installée - pour de meilleures perfs: npm i compression');
-}
 const port = 5000;
 
 // Middleware
 app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:8080'],
   credentials: true
-}));app.use(express.json());
+}));
+app.use(express.json());
 app.use(cookieParser());
 
 // Connexion à PostgreSQL
@@ -47,6 +41,9 @@ app.use('/api/auth', authGoogleRoutes);
 
 const recipesRoutes = require('./routes/recipes');
 app.use('/recipes/', recipesRoutes);
+
+const ingredientRoutes = require('./routes/ingredient');
+app.use('', ingredientRoutes);
 
 app.listen(port, () => {
   console.log(`Backend listening on port ${port}`);

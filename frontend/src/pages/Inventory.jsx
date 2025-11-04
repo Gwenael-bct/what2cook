@@ -5,6 +5,7 @@ import { useState } from "react";
 import CurrentUser from "../components/CurrentUser";
 import UserIngredients from "../components/Inventory/UserIngredients";
 import ReloadUser from "../services/ReloadUser";
+import IngredientSearch from "../components/searchIngredient";
 
 export default function Inventory() {
   const [user, setUser] = useState(null);
@@ -47,6 +48,8 @@ export default function Inventory() {
                     className="text-gray-100 font-medium flex-1 bg-transparent p-2 outline-none"
                 />
               </div>
+
+              <IngredientSearch icon={SearchIcon} />
             </div>
           </div>
 

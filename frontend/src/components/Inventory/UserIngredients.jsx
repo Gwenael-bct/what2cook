@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
 import { motion } from "framer-motion";
 
 export default function UserIngredients({ userId }) {
@@ -34,6 +34,8 @@ export default function UserIngredients({ userId }) {
           <tr>
             <th className="pl-6 text-left">Catégorie</th>
             <th className="pl-6 text-left">Ingrédient</th>
+
+            {/* //TODO Créer la logique quantité à l'utilisateur */}
             {/*<th className="pl-6 text-left">Quantité</th>*/}
             <th className="text-center">Action</th>
           </tr>
@@ -64,11 +66,15 @@ export default function UserIngredients({ userId }) {
                       />
                       <span className="font-medium">{ingredient.name}</span>
                     </td>
+
+                    {/* //TODO Créer la logique quantité à l'utilisateur */}
                     {/*<td className="p-6 border font-medium">*/}
                     {/*  {Math.floor(Math.random() * 500) + 1}*/}
                     {/*</td>*/}
                     <td className="p-6 text-center border-b">
                       <div className="grid grid-cols-2 text-center justify-self-center">
+
+                        {/* //TODO Créer la logique quantité à l'utilisateur */}
                         {/*<motion.div*/}
                         {/*    whileHover={{ scale: 1.25, color: "#3b82f6" }} // #3b82f6 = Tailwind blue-500*/}
                         {/*    whileTap={{ scale: 0.95 }}*/}
