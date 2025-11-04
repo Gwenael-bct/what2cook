@@ -52,14 +52,14 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
 
   return (
     <div className="relative w-full">
-      <div className="flex items-center bg-white/10 rounded-xl px-5 py-2">
-        <Icon className="text-gray-400" />
+      <div className="flex items-center bg-[#505050] rounded-xl px-5 py-3">
+        <Icon className="text-gray-300" />
         <input
           type="text"
           placeholder={lang === 'fr' ? "Rechercher un ingrédient" : "Search for an ingredient"}
           value={query}
           onChange={e => setQuery(e.target.value)}
-          className="text-gray-100 font-medium flex-1 bg-transparent p-2 outline-none"
+          className="text-white font-medium flex-1 bg-transparent p-2 outline-none placeholder:text-gray-300"
         />
       </div>
 
@@ -72,7 +72,7 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
 
       {/* Liste des résultats */}
       {query && results.length > 0 && !error && (
-        <ul className="absolute z-10 w-full mt-2 bg-[#1E1E1E] rounded-xl shadow-xl max-h-60 overflow-y-auto overflow-x-hidden">
+        <ul className="absolute z-10 w-full mt-2 bg-[#3A3A3A] rounded-xl shadow-xl max-h-60 overflow-y-auto overflow-x-hidden">
           {results.map(ingredient => (
               <li
                   key={ingredient.id}
@@ -84,7 +84,7 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
                 >
                   {/* --- Face avant --- */}
                   <div
-                      className="absolute inset-0 flex items-center gap-6 bg-[#1E1E1E] rounded-xl px-6
+                      className="absolute inset-0 flex items-center gap-6 bg-[#3A3A3A] rounded-xl px-6
                               [backface-visibility:hidden]"
                   >
                     <img
@@ -101,7 +101,7 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
 
                   {/* --- Face arrière --- */}
                   <div
-                      className="absolute inset-0 flex justify-center items-center bg-[#1E1E1E] rounded-xl
+                      className="absolute inset-0 flex justify-center items-center bg-[#3A3A3A] rounded-xl
                                 [transform:rotateX(180deg)] [backface-visibility:hidden]"
                   >
                     <motion.button
@@ -125,7 +125,7 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
       )}
 
       {isLoading && query && !error && (
-        <div className="absolute z-10 w-full mt-2 bg-[#1E1E1E] rounded-xl shadow-xl px-5 py-3 text-gray-400">
+        <div className="absolute z-10 w-full mt-2 bg-[#3A3A3A] rounded-xl shadow-xl px-5 py-3 text-gray-300">
           {lang === 'fr' ? 'Recherche en cours...' : 'Searching...'}
         </div>
       )}

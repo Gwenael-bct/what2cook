@@ -28,82 +28,88 @@ export default function UserIngredients({ userId }) {
   }, [userId]);
 
   return (
-      <div className="rounded-xl overflow-hidden shadow-md bg-white">
-        <table className="table-auto w-full">
-          <thead className="bg-gray-200">
-          <tr>
-            <th className="pl-6 text-left">Catégorie</th>
-            <th className="pl-6 text-left">Ingrédient</th>
-
-            {/* //TODO Créer la logique quantité à l'utilisateur */}
-            {/*<th className="pl-6 text-left">Quantité</th>*/}
-            <th className="text-center">Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          {categories.map((category) =>
-              category.ingredients.map((ingredient, index) => (
-                  <tr key={ingredient._key}>
-                    {index === 0 && (
-                        <td rowSpan={category.ingredients.length} className="p-6 border-b align-center">
-                          <div className="flex items-center gap-2">
-                            {category.image && (
-                                <img
-                                    src={category.image}
-                                    alt={category.name}
-                                    className="h-14 w-14 rounded-full object-cover bg-gray-100 saturate-150"
-                                />
-                            )}
-                            <span className="pl-4 font-medium">{category.name}</span>
+      <>
+        {/* Version Desktop - Tableau */}
+        <div className="hidden md:block rounded-xl overflow-hidden shadow-md bg-[#F5F5F5]">
+          <table className="table-auto w-full">
+            <thead className="bg-[#ECECEC]">
+            <tr>
+              <th className="pl-6 py-4 text-left text-base lg:text-lg font-semibold text-gray-800">Ingrédient</th>
+              <th className="text-center py-4 text-base lg:text-lg font-semibold text-gray-800">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {categories.map((category) =>
+                category.ingredients.map((ingredient, index) => (
+                    <tr key={ingredient._key} className="border-b border-gray-200 hover:bg-white/50 transition-colors">
+                      <td className="p-4 lg:p-6 align-center">
+                        <div className="flex items-center gap-3 lg:gap-4">
+                          <img
+                              src={ingredient.imageUrl}
+                              alt={ingredient.name}
+                              className="h-10 w-10 lg:h-12 lg:w-12 rounded-full object-cover bg-white saturate-150 shadow-sm"
+                          />
+                          <div>
+                            <div className="font-medium text-gray-900 text-sm lg:text-base">{ingredient.name}</div>
+                            <div className="text-xs lg:text-sm text-gray-500">{category.name}</div>
                           </div>
-                        </td>
-                    )}
-                    <td className="p-6 align-center border">
-                      <img
-                          src={ingredient.imageUrl}
-                          alt={ingredient.name}
-                          className="h-10 w-10 rounded-full object-cover bg-gray-100 saturate-150"
-                      />
-                      <span className="font-medium">{ingredient.name}</span>
-                    </td>
+                        </div>
+                      </td>
 
-                    {/* //TODO Créer la logique quantité à l'utilisateur */}
-                    {/*<td className="p-6 border font-medium">*/}
-                    {/*  {Math.floor(Math.random() * 500) + 1}*/}
-                    {/*</td>*/}
-                    <td className="p-6 text-center border-b">
-                      <div className="grid grid-cols-2 text-center justify-self-center">
-
-                        {/* //TODO Créer la logique quantité à l'utilisateur */}
-                        {/*<motion.div*/}
-                        {/*    whileHover={{ scale: 1.25, color: "#3b82f6" }} // #3b82f6 = Tailwind blue-500*/}
-                        {/*    whileTap={{ scale: 0.95 }}*/}
-                        {/*    transition={{ type: "spring", stiffness: 200, damping: 8 }}*/}
-                        {/*    className="relative cursor-pointer"*/}
-                        {/*>*/}
-                        {/*  /!* Halo animé *!/*/}
-                        {/*  <motion.span*/}
-                        {/*      className="absolute inset-0 rounded-full bg-blue-300 opacity-0 blur-md"*/}
-                        {/*      whileHover={{ opacity: 0.4, scale: 1.5 }}*/}
-                        {/*      transition={{ duration: 0.3 }}*/}
-                        {/*  />*/}
-                        {/*  <AddIcon fontSize="large" className="text-blue-500 relative z-10" />*/}
-                        {/*</motion.div>*/}
-
+                      <td className="p-4 lg:p-6 text-center">
                         <motion.div
-                            whileHover={{ scale: 1.2, rotate: 10 }}
+                            whileHover={{ scale: 1.15 }}
                             whileTap={{ scale: 0.9 }}
                             transition={{ type: "spring", stiffness: 150 }}
+                            className="inline-block"
                         >
-                          <DeleteIcon fontSize="large" className="text-red-500 cursor-pointer" />
+                          <DeleteIcon fontSize="large" className="text-[#EF4444] cursor-pointer" />
                         </motion.div>
+                      </td>
+                    </tr>
+                ))
+            )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Version Mobile - Cartes */}
+        <div className="md:hidden space-y-3">
+          {categories.map((category) =>
+              category.ingredients.map((ingredient, index) => (
+                  <motion.div
+                      key={ingredient._key}
+                      className="bg-[#F5F5F5] rounded-xl p-4 shadow-md"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 200 }}
+                  >
+                    <div className="flex items-center justify-between">
+                      {/* Info ingrédient */}
+                      <div className="flex items-center gap-3 flex-1">
+                        <img
+                            src={ingredient.imageUrl}
+                            alt={ingredient.name}
+                            className="h-14 w-14 rounded-full object-cover bg-white saturate-150 shadow-sm"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-semibold text-gray-900 text-base truncate">{ingredient.name}</div>
+                          <div className="text-sm text-gray-500 truncate">{category.name}</div>
+                        </div>
                       </div>
-                    </td>
-                  </tr>
+
+                      {/* Action delete */}
+                      <motion.div
+                          whileTap={{ scale: 0.9 }}
+                          transition={{ type: "spring", stiffness: 150 }}
+                          className="ml-2"
+                      >
+                        <DeleteIcon fontSize="medium" className="text-[#EF4444] cursor-pointer" />
+                      </motion.div>
+                    </div>
+                  </motion.div>
               ))
           )}
-          </tbody>
-        </table>
-      </div>
+        </div>
+      </>
   );
 }

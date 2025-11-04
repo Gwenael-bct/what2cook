@@ -6,6 +6,7 @@ import CurrentUser from "../components/CurrentUser";
 import UserIngredients from "../components/Inventory/UserIngredients";
 import ReloadUser from "../services/ReloadUser";
 import IngredientSearch from "../components/searchIngredient";
+import Particles from "../components/elementsDecor/Particles";
 
 export default function Inventory() {
   const [user, setUser] = useState(null);
@@ -16,26 +17,31 @@ export default function Inventory() {
   };
 
   return (
-      <main className="min-h-screen bg-[#121212] p-4 md:p-8">
+      <main className="min-h-screen bg-[#2B2B2B] p-2 sm:p-4 md:p-8">
 
         <Header />
 
         <CurrentUser onUserLoaded={setUser} />
 
-        <div className="mt-24 rounded-2xl shadow-xl bg-[#1E1E1E] px-20 py-8 m-48">
+        <div className="mt-16 sm:mt-20 md:mt-24 rounded-xl md:rounded-2xl shadow-xl bg-[#3A3A3A] px-4 sm:px-8 md:px-12 lg:px-20 py-6 sm:py-8 mx-2 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-48">
+          <Particles />
 
           {user &&
-            <p className="text-white font-bold text-center text-4xl">Bienvenue {user.username.split(" ")[0]}</p>
+            <p className="text-white font-bold text-center text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">
+              Bienvenue {user.username.split(" ")[0]}
+            </p>
           }
 
           {/* Titre + ajout d'ingrédient */}
-          <div className="flex justify-between py-8">
-            <div className="text-white font-bold text-4xl">Gérer Mon Inventaire</div>
+          <div className="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-8 py-4 sm:py-6 md:py-8">
+            {/* Titre principal */}
+            <div className="flex-1">
+              <div className="text-white font-bold text-3xl sm:text-4xl md:text-5xl">Gérer Mon Inventaire</div>
+            </div>
 
-            <div className="grid grid-cols-1 gap-4">
-              <div className="text-gray-200 font-semibold text-4xl">Ajouter un ingrédient</div>
-
-              {/* Champ ingrédient */}
+            {/* Section ajout ingrédient */}
+            <div className="flex-1 lg:max-w-md">
+              <div className="text-white font-semibold text-lg sm:text-xl mb-3 sm:mb-4">Ajouter un Ingrédient Rapide</div>
               <IngredientSearch icon={SearchIcon} user={user} onIngredientAdded={handleIngredientAdded} />
 
               {/* //TODO Créer la logique quantité à l'utilisateur */}
@@ -52,14 +58,13 @@ export default function Inventory() {
           </div>
 
           {user &&
-              <div className="p-4">
+              <div className="py-4 sm:py-6">
                 <UserIngredients userId={user?.id} key={refreshKey} />
               </div>
           }
 
-          <div className="text-center text-white font-medium gap-2 text-xl pt-8">
+          <div className="text-center text-white font-medium gap-2 text-base sm:text-lg md:text-xl pt-6 sm:pt-8">
             <ReloadUser onUserLoaded={setUser} colorButton="bg-white/10" />
-
           </div>
         </div>
       </main>

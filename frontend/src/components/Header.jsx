@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -35,11 +36,8 @@ export default function Header() {
               onClick={() => navigate("/inventaire")}
               className="hover:text-orange-400 text-2xl"
           >
-            Inventaire
+            <PermIdentityIcon fontSize="large" />
           </button>
-
-          <a href="#" className="hover:text-orange-400 text-2xl">Recettes</a>
-          <a href="#" className="hover:text-orange-400 text-2xl">A propos</a>
         </nav>
       </header>
   );
