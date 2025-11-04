@@ -51,7 +51,7 @@ export default function UserIngredients({ userId }) {
                                 <img
                                     src={category.image}
                                     alt={category.name}
-                                    className="h-14 w-14 rounded-full object-cover bg-gray-100"
+                                    className="h-14 w-14 rounded-full object-cover bg-gray-100 saturate-150"
                                 />
                             )}
                             <span className="pl-4 font-medium">{category.name}</span>
@@ -62,7 +62,7 @@ export default function UserIngredients({ userId }) {
                       <img
                           src={ingredient.imageUrl}
                           alt={ingredient.name}
-                          className="h-10 w-10 rounded-full object-cover bg-gray-100"
+                          className="h-10 w-10 rounded-full object-cover bg-gray-100 saturate-150"
                       />
                       <span className="font-medium">{ingredient.name}</span>
                     </td>

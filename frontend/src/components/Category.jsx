@@ -54,7 +54,7 @@ export default function Category({ userId, handleClick}) {
                         <img
                             src={row.image}
                             alt={row.name}
-                            className="h-full w-full object-cover bg-gray-100"
+                            className="h-full w-full object-cover bg-gray-100 saturate-150"
                             loading="lazy"
                         />
                       </div>

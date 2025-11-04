@@ -40,10 +40,13 @@ const authGoogleRoutes = require('./routes/authGoogle');
 app.use('/api/auth', authGoogleRoutes);
 
 const recipesRoutes = require('./routes/recipes');
-app.use('/recipes/', recipesRoutes);
+app.use('/recipes', recipesRoutes);
 
 const ingredientRoutes = require('./routes/ingredient');
-app.use('', ingredientRoutes);
+app.use('/ingredients', ingredientRoutes);
+
+const userIngredientRoutes = require('./routes/userIngredients');
+app.use('/user-ingredients', userIngredientRoutes);
 
 app.listen(port, () => {
   console.log(`Backend listening on port ${port}`);
