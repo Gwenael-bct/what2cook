@@ -4,7 +4,7 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import IconCard from '../IconCard';
 import RecipesCarousel from './RecipesCarousel';
 
-export default function HeroSection() {
+export default function FeaturesSection() {
   const icons = [
     { icon: ShoppingBasketIcon, color: "#34d399", text: "Find recipes with your ingredients" },
     { icon: FavoriteIcon, color: "#34d399", text: "Save your favorite recipes" },
@@ -12,8 +12,8 @@ export default function HeroSection() {
   ];
 
   return (
-      <div className="bg-transparent w-full flex justify-center py-16">
-        <div className="container mx-auto flex flex-col md:flex-row gap-8">
+      <div className="bg-transparent w-full flex justify-center py-6 md:py-12">
+        <div className="container mx-auto flex flex-col md:flex-row gap-6 md:gap-8">
 
           {/* 🔹 Colonne icônes */}
           {/*<div className="flex-1 md:flex-[1] flex items-center justify-center">*/}

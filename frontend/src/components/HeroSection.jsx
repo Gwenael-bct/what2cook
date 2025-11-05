@@ -1,34 +1,30 @@
 import SearchIcon from '@mui/icons-material/Search';
-import Header from './Header';
+import Header from './layout/Header';
 export default function HeroSection() {
   return (
       <div
-          className="
-          h-screen
-          bg-contain relative
-          flex flex-col justify-center items-center
-          invisible
-        "
+          className="h-[60vh] sm:h-[65vh] md:h-96 lg:h-[500px] xl:h-[600px] bg-cover bg-center relative flex flex-col
+          justify-center items-center"
           style={{
             backgroundImage: "url('/assets/images/homePage/hero_banner.webp')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'top'
           }}
       >
-        <Header />
-        <div className="grid-cols-1 flex flex-col justify-center items-center">
 
-          <h1 className="text-3xl m-6 md:text-3xl font-medium text-white">
+        <Header />
+
+        <div className="grid-cols-1 flex flex-col justify-center items-center px-4">
+
+          <h1 className="text-lg mb-6 mt-4 md:text-3xl font-bold text-white text-center">
             Transform your ingredients into extraordinary dishes
           </h1>
 
           <div
               className="
-          w-full max-w-sm transition ease-in-out
-          p-2 bg-transparent rounded-xl shadow-lg bg-opacity-75
-          flex flex-col gap-2 md:flex-row md:gap-2 md:max-w-lg
-          border-amber-100 border-2
-        "
+                w-full max-w-xs transition ease-in-out
+                p-2 bg-transparent rounded-xl shadow-lg bg-opacity-75
+                flex flex-col gap-2 md:flex-row md:gap-2 md:max-w-lg
+                border-amber-100 border-2
+              "
           >
             <div className="hidden items-center bg-white rounded-xl px-5 py-2 relative md:flex-1 md:flex">
               <SearchIcon className="text-gray-400"/>

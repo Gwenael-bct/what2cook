@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 // import AddIcon from '@mui/icons-material/Add';
 import { motion } from "framer-motion";
+import {deleteUserIngredient} from "../../services/DeleteUserIngredientService";
 
-export default function UserIngredients({ userId }) {
+export default function UserIngredients({ userId, onIngredientDeleted }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -63,7 +64,14 @@ export default function UserIngredients({ userId }) {
                             transition={{ type: "spring", stiffness: 150 }}
                             className="inline-block"
                         >
-                          <DeleteIcon fontSize="large" className="text-[#EF4444] cursor-pointer" />
+                          <DeleteIcon fontSize="large"
+                                      className="text-[#EF4444] cursor-pointer"
+                                      onClick={async (e) => {
+                                        e.stopPropagation();
+                                        const result = await deleteUserIngredient(ingredient.id);
+                                        if (result.success && onIngredientDeleted) onIngredientDeleted();
+                                      }}
+                          />
                         </motion.div>
                       </td>
                     </tr>
@@ -74,36 +82,43 @@ export default function UserIngredients({ userId }) {
         </div>
 
         {/* Version Mobile - Cartes */}
-        <div className="md:hidden space-y-3">
+        {/* Version Mobile - Grille 2 colonnes */}
+        <div className="md:hidden grid grid-cols-2 gap-3">
           {categories.map((category) =>
               category.ingredients.map((ingredient, index) => (
                   <motion.div
                       key={ingredient._key}
-                      className="bg-[#F5F5F5] rounded-xl p-4 shadow-md"
+                      className="bg-[#F5F5F5] rounded-xl p-3 shadow-md"
                       whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 200 }}
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col items-center text-center gap-2">
+                      {/* Image ingrédient */}
+                      <img
+                          src={ingredient.imageUrl}
+                          alt={ingredient.name}
+                          className="h-10 w-10 rounded-full object-cover bg-white saturate-150 shadow-sm"
+                      />
+
                       {/* Info ingrédient */}
-                      <div className="flex items-center gap-3 flex-1">
-                        <img
-                            src={ingredient.imageUrl}
-                            alt={ingredient.name}
-                            className="h-14 w-14 rounded-full object-cover bg-white saturate-150 shadow-sm"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-gray-900 text-base truncate">{ingredient.name}</div>
-                          <div className="text-sm text-gray-500 truncate">{category.name}</div>
-                        </div>
+                      <div className="flex-1 min-w-0 w-full">
+                        <div className="font-semibold text-gray-900 text-sm truncate">{ingredient.name}</div>
+                        <div className="text-xs text-gray-500 truncate">{category.name}</div>
                       </div>
 
                       {/* Action delete */}
                       <motion.div
                           whileTap={{ scale: 0.9 }}
                           transition={{ type: "spring", stiffness: 150 }}
-                          className="ml-2"
                       >
-                        <DeleteIcon fontSize="medium" className="text-[#EF4444] cursor-pointer" />
+                        <DeleteIcon fontSize="small"
+                                    className="text-[#EF4444] cursor-pointer"
+                                    onClick={async (e) => {
+                                      e.stopPropagation();
+                                      const result = await deleteUserIngredient(ingredient.id);
+                                      if (result.success && onIngredientDeleted) onIngredientDeleted();
+                                    }}
+                        />
                       </motion.div>
                     </div>
                   </motion.div>

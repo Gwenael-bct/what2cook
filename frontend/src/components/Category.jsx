@@ -37,20 +37,20 @@ export default function Category({ userId, handleClick}) {
   };
 
   return (
-      <>
+      <div className="grid grid-cols-2 md:grid-cols-1 gap-2 md:gap-0">
         {categories.map((row, index) =>
             row ? (
-                <div key={row.id ?? index}>
+                <div key={row.id ?? index} className="md:col-span-1">
                   <button
                       id={`dropdownButton-${row.id ?? index}`}
                       data-dropdown-toggle={`dropdown-${row.id ?? index}`}
-                      className="flex items-center justify-between w-full border-b border-gray-200 p-2 hover:shadow-md rounded"
+                      className="flex items-center justify-between w-full border-b border-gray-200 p-2 md:p-3 hover:shadow-md rounded transition-shadow"
                       type="button"
                       onClick={() => toggleCategory(row.id ?? index)}
                   >
                     {/* Groupe image + texte catégorie */}
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 md:h-16 w-12 md:w-16 rounded-full overflow-hidden flex items-center justify-center">
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <div className="h-10 w-10 md:h-16 md:w-16 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0">
                         <img
                             src={row.image}
                             alt={row.name}
@@ -58,14 +58,14 @@ export default function Category({ userId, handleClick}) {
                             loading="lazy"
                         />
                       </div>
-                      <span className="text-black text-sm md:text-base font-medium">
+                      <span className="text-black text-xs md:text-base font-medium text-left line-clamp-2">
                   {row.name}
                 </span>
                     </div>
 
                     {/* Flèche dropdown */}
                     <svg
-                        className={`w-4 h-4 text-gray-500 mr-6 transform transition-transform duration-300 ${
+                        className={`w-3 h-3 md:w-4 md:h-4 text-gray-500 mr-1 md:mr-6 flex-shrink-0 transform transition-transform duration-300 ${
                             openCategory === (row.id ?? index) ? "rotate-180" : "rotate-0"
                         }`}
                         aria-hidden="true"
@@ -85,22 +85,22 @@ export default function Category({ userId, handleClick}) {
 
                   {/* Dropdown ingrédients */}
                   {userId && openCategory === row.id && row?.ingredients?.length > 0 && (
-                      <div className="mt-2 p-2 bg-gray-50 rounded-lg shadow-inner">
-                        <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6">
+                      <div className="mt-2 p-2 md:p-3 bg-gray-50 rounded-lg shadow-inner">
+                        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
                           {row.ingredients.map((ingredient) => (
                               <li key={ingredient._key}>
                                 <div
-                                    className="flex flex-col items-center gap-2 cursor-pointer group"
+                                    className="flex flex-col items-center gap-1 md:gap-2 cursor-pointer group"
                                     onClick={() => handleIngredientClick(ingredient.name_en)}
                                 >
-                                  <div className="h-14 w-14 md:h-16 md:w-16 rounded-full overflow-hidden bg-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                                  <div className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full overflow-hidden bg-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-200 flex-shrink-0">
                                     <img
                                         src={ingredient.imageUrl}
                                         alt={ingredient.name}
                                         className="h-full w-full object-cover group-hover:scale-105 transition-transform saturate-150 duration-200"
                                     />
                                   </div>
-                                  <span className="text-xs md:text-sm text-center font-medium text-gray-800">
+                                  <span className="text-[10px] sm:text-xs md:text-sm text-center font-medium text-gray-800 line-clamp-2 w-full">
                                     {ingredient.name}
                                   </span>
                                 </div>
@@ -112,6 +112,6 @@ export default function Category({ userId, handleClick}) {
                 </div>
             ) : null
         )}
-      </>
+      </div>
   );
 }

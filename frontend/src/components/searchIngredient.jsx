@@ -8,6 +8,7 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [flippedId, setFlippedId] = useState(null);
 
   // Détecter la langue du navigateur
   const getBrowserLang = () => {
@@ -73,18 +74,39 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
       {/* Liste des résultats */}
       {query && results.length > 0 && !error && (
         <ul className="absolute z-10 w-full mt-2 bg-[#3A3A3A] rounded-xl shadow-xl max-h-60 overflow-y-auto overflow-x-hidden">
-          {results.map(ingredient => (
+          {results.map(ingredient => {
+            const isFlipped = flippedId === ingredient.id;
+            return (
               <li
                   key={ingredient.id}
                   className="relative w-full h-20 [perspective:1200px] group"
               >
                 <motion.div
-                    className="relative w-full h-full rounded-xl shadow-md transition-transform duration-300 ease-[cubic-bezier(0.4,0.2,0.2,1)] [transform-style:preserve-3d]"
-                    whileHover={{ rotateX: 180 }}
+                    className="relative w-full h-full rounded-xl shadow-md cursor-pointer [transform-style:preserve-3d]"
+                    animate={{ rotateX: isFlipped ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.4, 0.2, 0.2, 1] }}
+                    onHoverStart={() => {
+                      // Desktop: flip au hover
+                      if (window.innerWidth >= 768) {
+                        setFlippedId(ingredient.id);
+                      }
+                    }}
+                    onHoverEnd={() => {
+                      // Desktop: unflip au unhover
+                      if (window.innerWidth >= 768) {
+                        setFlippedId(null);
+                      }
+                    }}
+                    onTap={() => {
+                      // Mobile: flip au tap (toggle)
+                      if (window.innerWidth < 768) {
+                        setFlippedId(isFlipped ? null : ingredient.id);
+                      }
+                    }}
                 >
                   {/* --- Face avant --- */}
                   <div
-                      className="absolute inset-0 flex items-center gap-6 bg-[#3A3A3A] rounded-xl px-6
+                      className="absolute inset-0 flex items-center gap-4 md:gap-6 bg-[#3A3A3A] rounded-xl px-4 md:px-6
                               [backface-visibility:hidden]"
                   >
                     <img
@@ -92,9 +114,9 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
                             ingredient.name_en
                         )}-Small.png`}
                         alt={ingredient.name}
-                        className="h-12 w-12 rounded-full object-cover saturate-150"
+                        className="h-12 w-12 rounded-full object-cover saturate-150 flex-shrink-0"
                     />
-                    <span className="text-gray-100 text-lg font-medium text-center flex-1">
+                    <span className="text-gray-100 text-base md:text-lg font-medium flex-1">
                       {lang === "fr" ? ingredient.name_fr : ingredient.name_en}
                     </span>
                   </div>
@@ -108,11 +130,13 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
                         whileHover={{ scale: 1.08 }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="bg-white/10 text-gray-100 font-semibold px-6 py-2 rounded-lg shadow-md border border-white/20 backdrop-blur-sm focus-visible"
-                        onClick={async () => {
+                        className="bg-white/10 text-gray-100 font-semibold px-4 md:px-6 py-2 rounded-lg shadow-md border border-white/20 backdrop-blur-sm text-sm md:text-base"
+                        onClick={async (e) => {
+                          e.stopPropagation();
                           await addUserIngredient(ingredient.id);
                           if (onIngredientAdded) onIngredientAdded();
                           setQuery('');
+                          setFlippedId(null);
                         }}
                     >
                       {lang === "fr" ? "Ajouter l'ingrédient" : "Add ingredient"}
@@ -120,7 +144,8 @@ export default function IngredientSearch({ icon: Icon, user, onIngredientAdded }
                   </div>
                 </motion.div>
               </li>
-          ))}
+            );
+          })}
         </ul>
       )}
 

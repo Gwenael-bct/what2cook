@@ -54,8 +54,8 @@ export function RecipesAvailable({ onRecipeSelected }) {
 
   return (
       <>
-        <div className="grid grid-cols-1 bg-neutral-900 w-full justify-center py-8 relative">
-          <div className="container mx-auto flex flex-col md:flex-row gap-8 bg-stone-100 rounded-xl relative">
+        <div className="grid grid-cols-1 w-full justify-center py-6 md:py-8 relative">
+          <div className="container mx-auto flex flex-col md:flex-row gap-8 bg-stone-100 rounded-3xl relative">
             {/* RecipeDetails collé par le bas au haut du container blanc */}
             {recipeDetails && (
               <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-full md:w-3/4 px-4 z-50"
@@ -102,7 +102,7 @@ export function RecipesAvailable({ onRecipeSelected }) {
               </div>
             </div>
           </div>
-          <div className="container mx-auto flex flex-col md:flex-row py-8 rounded-xl justify-center">
+          <div className="container mx-auto flex flex-col md:flex-row py-8 rounded-xl justify-center items-center">
             <ReloadUser onUserLoaded={setUser} colorButton="bg-stone-100" />
           </div>
         </div>
