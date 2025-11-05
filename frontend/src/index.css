@@ -17,6 +17,16 @@
   -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
 }
 
+/* Masquer la scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE et Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari et Opera */
+}
+
 @keyframes scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -47,3 +57,42 @@ input[type=number]::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+@keyframes float {
+  0%   { transform: translateY(0) translateX(0); opacity: 0.9; }
+  50%  { transform: translateY(-20px) translateX(10px); opacity: 0.5; }
+  100% { transform: translateY(0) translateX(0); opacity: 0.9; }
+}
+
+.animate-float {
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Réduit le coût layout/paint pour les sections hors-écran */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
+}
+
+
+/* === Carousel smooth scroll */
+@keyframes carousel-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.carousel-scroll {
+  animation: carousel-scroll var(--scroll-duration, 25s) linear infinite;
+  will-change: transform;
+}
+
+.carousel-container:hover .carousel-scroll {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-scroll { animation: none !important; }
+}
+

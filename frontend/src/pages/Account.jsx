@@ -1,7 +1,7 @@
 import React from 'react';
-import FeaturesSection from '../components/FeaturesSection';
+import FeaturesSection from '../components/homePage/FeaturesSection';
 import HeroSection from '../components/HeroSection';
-import {RecipesAvailable} from "../components/RecipesAvailable";
+import {RecipesAvailable} from "../components/homePage/RecipesAvailable";
 import GoogleLogin from "../components/GoogleSignIn";
 
 export default function HomePage() {

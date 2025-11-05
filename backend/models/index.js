@@ -13,7 +13,20 @@ let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  // Utiliser les variables d'environnement si disponibles (Docker), sinon config.json (développement local)
+  const dbConfig = {
+    database: process.env.DB_NAME || config.database,
+    username: process.env.DB_USER || config.username,
+    password: process.env.DB_PASSWORD || config.password,
+    host: process.env.DB_HOST || config.host,
+    dialect: config.dialect,
+    logging: false,
+  };
+  sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
+    host: dbConfig.host,
+    dialect: dbConfig.dialect,
+    logging: dbConfig.logging,
+  });
 }
 
 fs
